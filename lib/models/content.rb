@@ -3,11 +3,14 @@ class Content
 
   @@all = []
 
+#
   def initialize(title, description, keywords, link="Link not provided")
     @title = title
     @description = description
     @keywords = keywords
     @link = link
+
+    #adds instance of Content to @@all
     @@all << self
   end
 

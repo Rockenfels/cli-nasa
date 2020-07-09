@@ -1,8 +1,14 @@
 # Cli::Nasa
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cli/nasa`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to the CLI-NASA gem! This program is designed to allow individuals to
+search through the NASA Image and Video Library to quickly find content displayed
+by title and link URL. Users have the option to do a keyword search that returns
+a wide variety of results, or a media-specific search for only audio, image, or
+video files.
 
-TODO: Delete this and the text above, and describe your gem
+Once a user has selected a search and entered terms, they will have the ability
+to view all related pieces of content as well as content-specific keywords &
+descriptions.
 
 ## Installation
 
@@ -22,7 +28,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Once the file is running, follow the provided prompts and list of commands
+to access content and its associated data from the library.
 
 ## Development
 

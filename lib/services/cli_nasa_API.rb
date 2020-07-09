@@ -1,10 +1,8 @@
-# require 'httparty'
 class CliNasaAPI
   @baseline = "https://images-api.nasa.gov"
 
   def self.basic_search(terms)
     results = HTTParty.get(@baseline + "/search?q=#{terms}")
-
   end
 
   def self.media_search(type, terms)
