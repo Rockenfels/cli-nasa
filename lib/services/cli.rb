@@ -26,7 +26,7 @@ class Cli
 
   # Prompts the user for input
   def self.get_input
-    puts "Please make a selection."
+    puts "\n\nPlease make a selection.\n\n"
     input = gets.chomp!
     input
   end
@@ -51,17 +51,18 @@ class Cli
         self.video_search()
         Content.all
       when "exit"
-        puts "Thank you, please come again!"
+        puts "\n\nThank you, please come again!"
         exit
       else
-        "Command not recognized, please try again."
+        puts "\n\nCommand not recognized, please try again."
+        self.main_menu
       end
   end
 
   # Gets search terms and creates Content objects based on the provided results
   def self.keyword_search
     Content.all.clear
-    puts "Please enter your search terms."
+    puts "\n\nPlease enter your search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
@@ -73,7 +74,7 @@ class Cli
       links = result["links"][0] if result["links"] != nil
 
       title = attributes["title"]
-      description = attributes["description_508"]
+      description = attributes["description"]
       keywords = attributes["keywords"]
       link = links["href"] if links != nil
 
@@ -84,7 +85,7 @@ class Cli
   # Gets search terms and creates Content objects based on the provided results
   def self.image_search
     Content.all.clear
-    puts "Please enter your image search terms."
+    puts "\n\nPlease enter your image search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
@@ -96,7 +97,7 @@ class Cli
       links = result["links"][0]
 
       title = attributes["title"]
-      description = attributes["description_508"]
+      description = attributes["description"]
       keywords = attributes["keywords"]
       link = links["href"]
 
@@ -107,7 +108,7 @@ class Cli
   # Gets search terms and creates Content objects based on the provided results
   def self.audio_search
     Content.all.clear
-    puts "Please enter your audio search terms."
+    puts "\n\nPlease enter your audio search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
@@ -119,7 +120,7 @@ class Cli
       links = result["links"][0] if result["links"] != nil
 
       title = attributes["title"]
-      description = attributes["description_508"]
+      description = attributes["description"]
       keywords = attributes["keywords"]
       link = links["href"] if links != nil
 
@@ -130,7 +131,7 @@ class Cli
   # Gets search terms and creates Content objects based on the provided results
   def self.video_search
     Content.all.clear
-    puts "Please enter your video search terms."
+    puts "\n\nPlease enter your video search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
@@ -142,7 +143,7 @@ class Cli
       links = result["links"][0] if result["links"] != nil
 
       title = attributes["title"]
-      description = attributes["description_508"]
+      description = attributes["description"]
       keywords = attributes["keywords"]
       link = links["href"] if links != nil
 
@@ -155,15 +156,17 @@ class Cli
   def self.display_content(results)
     input = ""
     page = 1
-    current = results[page-1]
+
     while input != "s"
+
+      current = results[page-1]
       puts "\n\nPage #{page}: #{current.title}"
       if current.link == nil
         puts "Link: link not available"
       else
         puts "Link: #{current.link}"
       end
-      puts "\nHere are your available commands:"
+      puts "\n\nHere are your available commands:"
       puts ">> k - Displays the content's keywords"
       puts ">> d - Displays the content's description."
       puts ">> n - Shows the next result"
