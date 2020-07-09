@@ -1,57 +1,58 @@
-require 'pry'
-require_relative '../models/content.rb'
-require_relative './cli_nasa_API.rb'
-#^^^^^REMOVE ME AFTER TESTING!!!!!!!!^^^^^^^
-
 class Cli
   attr_accessor :content
 
-  def initialize
-  end
-
-  def greeting
+  def self.greeting
     puts "Welcome to the NASA-CLI, here are your available commands: "
-    puts "k - a keyword search of the Nasa Image and Video Library"
-    puts "i - a search of the library focused for only images"
-    puts "a - a search of the library focused for only audio clips"
-    puts "v - a search of the library focused for only videos"
-    puts "exit - exit NASA-CLI"
+    puts ">> s - a keyword search of the Nasa Image and Video Library"
+    puts ">> i - a search of the library focused for only images"
+    puts ">> a - a search of the library focused for only audio clips"
+    puts ">> v - a search of the library focused for only videos"
+    puts ">> exit - exit NASA-CLI"
   end
 
   def self.run
-    self.greeting
-    return if search_menu_command() == nil
+    greeting
+    results = []
+
+    results = self.search_menu_command()
+    until result == "Thank you, please come again!"
+      self.display_content(results)
+      results = self.search_menu_command()
+    end
 
   end
 
-  def get_input
+  def self.get_input
     puts "Please make a selection."
     input = gets.chomp!
     input
   end
 
-  def search_menu_command
-      command = get_input()
+  def self.search_menu_command
+      command = self.get_input()
 
       case command
-      when "k"
-        keyword_search()
-        Content.all[0]
+      when "s"
+        self.keyword_search()
+        Content.all
       when "i"
-        image_search()
-        Content.all[0]
+        self.image_search()
+        Content.all
       when "a"
-        audio_search()
-        Content.all[0]
+        self.audio_search()
+        Content.all
       when "v"
-        video_searh()
-        Content.all[0] 
+        self.video_search()
+        Content.all
       when "exit"
+        "Thank you, please come again!"
         return
+      else
+        "Command not recognized, please try again."
       end
   end
 
-  def keyword_search()
+  def self.keyword_search()
     Content.all.clear
     puts "Please enter your search terms."
     terms = gets.chomp!
@@ -65,7 +66,7 @@ class Cli
    end
   end
 
-  def image_search
+  def self.image_search
     Content.all.clear
     puts "Please enter your image search terms."
     terms = gets.chomp!
@@ -79,7 +80,7 @@ class Cli
     end
   end
 
-  def audio_search
+  def self.audio_search
     puts "Please enter your audio search terms."
     terms = gets.chomp!
     Content.all.clear
@@ -93,7 +94,7 @@ class Cli
     end
   end
 
-  def video_search
+  def self.video_search
     Content.all.clear
     puts "Please enter your video search terms."
     terms = gets.chomp!
@@ -103,10 +104,36 @@ class Cli
       description = result["collection"]["items"]["data"]["description"]
       keywords = result["collection"]["items"]["data"]["keywords"]
       link = result["collection"]["items"]["data"]["links"]["href"]
-      add_content(title, description, keywords, link)
+      Content.add_content(title, description, keywords, link)
+    end
+  end
+
+  def self.display_content(result)
+    input = ""
+    page = 1
+    while input != "s"
+      puts "Page #{page}: #{result[page-1].title} \n #{result[page-1].link}"
+      puts "Here are your available commands:"
+      puts ">> k - Displays the content's keywords"
+      puts ">> d - Displays the content's description."
+      puts ">> n - Shows the next result"
+      puts ">> p - Shows the previous result"
+      puts ">> s - Start a new search."
+
+      input = self.get_input()
+      case input
+      when "k"
+        puts "Keywords : #{result[page-1].keywords}"
+      when "d"
+        puts "Description : #{result.description}"
+      when "n"
+        page < result.length ? page += 1 : "There are no further results."
+      when "p"
+        page > 1 ? page -= 1 : "You're at the top of your results."
+      else
+        "Command not recognized, please try again."
+      end
     end
   end
 
 end
-cli = Cli.new
-binding.pry

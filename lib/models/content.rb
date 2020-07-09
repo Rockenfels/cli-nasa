@@ -1,5 +1,3 @@
-require 'pry'
-#^^^^^REMOVE ME AFTER TESTING!!!!!!!!^^^^^^^
 class Content
   attr_reader :title, :description, :keywords, :link
 
