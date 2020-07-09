@@ -1,9 +1,20 @@
-# require 'pry'
-# require './cli_nasa_API.rb'
-# require '../models/content.rb'
 class Cli
   attr_accessor :content
 
+
+  # Method called at startup that brings up main menu
+  def self.run
+    self.main_menu
+  end
+
+  # Brings up .greeting, begins the search process, and then displays the provided results
+  def self.main_menu
+    self.greeting
+    results = self.search_menu_command()
+    self.display_content(results)
+  end
+
+  # Welcomes users and provides the list of available commands
   def self.greeting
     puts "\n\nWelcome to the NASA-CLI, here are your available commands: "
     puts ">> s - a keyword search of the Nasa Image and Video Library"
@@ -13,26 +24,16 @@ class Cli
     puts ">> exit - exit NASA-CLI\n"
   end
 
-  def self.run
-    self.main_menu
-
-    puts "Thank you, please come again!"
-    return
-  end
-
-  def self.main_menu
-    self.greeting
-    results = self.search_menu_command()
-    self.display_content(results)
-
-  end
-
+  # Prompts the user for input
   def self.get_input
     puts "Please make a selection."
     input = gets.chomp!
     input
   end
 
+  # Runs the specific search requested by the user and returns results as
+  # an array of Content objects, asks the user to submit a valid command,
+  # or exits the program
   def self.search_menu_command
       command = self.get_input()
 
@@ -57,6 +58,7 @@ class Cli
       end
   end
 
+  # Gets search terms and creates Content objects based on the provided results
   def self.keyword_search
     Content.all.clear
     puts "Please enter your search terms."
@@ -79,6 +81,7 @@ class Cli
     end
   end
 
+  # Gets search terms and creates Content objects based on the provided results
   def self.image_search
     Content.all.clear
     puts "Please enter your image search terms."
@@ -101,6 +104,7 @@ class Cli
     end
   end
 
+  # Gets search terms and creates Content objects based on the provided results
   def self.audio_search
     Content.all.clear
     puts "Please enter your audio search terms."
@@ -123,6 +127,7 @@ class Cli
     end
   end
 
+  # Gets search terms and creates Content objects based on the provided results
   def self.video_search
     Content.all.clear
     puts "Please enter your video search terms."
@@ -145,6 +150,8 @@ class Cli
     end
   end
 
+  # Method for displaying a piece of content, navigating thorugh its data,
+  # and prompting the user for their next valid command
   def self.display_content(results)
     input = ""
     page = 1
