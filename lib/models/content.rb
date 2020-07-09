@@ -3,7 +3,7 @@ class Content
 
   @@all = []
 
-  def initialize(title, description, keywords, link)
+  def initialize(title, description, keywords, link="Link not provided")
     @title = title
     @description = description
     @keywords = keywords
@@ -19,7 +19,7 @@ class Content
     @@all
   end
 
-  def add_content(title, description, keywords, link)
+  def self.add_content(title, description, keywords, link)
     Content.new(title, description, keywords, link)
   end
 end
