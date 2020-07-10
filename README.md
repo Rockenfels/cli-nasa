@@ -1,6 +1,6 @@
 # CLI-NASA
 
-Welcome to the CLI-NASA gem! This program is designed to allow individuals to
+Welcome to the cli-nasa gem! This program is designed to allow individuals to
 search through the NASA Image and Video Library to quickly find content displayed
 by title and link URL. Users have the option to do a keyword search that returns
 a wide variety of results, or a media-specific search for only audio, image, or
@@ -29,7 +29,12 @@ Or install it yourself as:
 ## Usage
 
 Once the file is running, follow the provided prompts and list of commands
-to access content and its associated data from the library.
+to access content and its associated data from the library. The main menu
+provides the option to search by keyword for all types of media, or to search
+for image, audio, or video content specifically.
+
+Once a search has been made, users can interact with the title, description,
+associated keyword, and a link to the content displayed on NASA.gov.
 
 ## Development
 
