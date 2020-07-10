@@ -1,4 +1,4 @@
-# Cli::Nasa
+# CLI-NASA
 
 Welcome to the CLI-NASA gem! This program is designed to allow individuals to
 search through the NASA Image and Video Library to quickly find content displayed

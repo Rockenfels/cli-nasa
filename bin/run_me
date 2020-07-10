@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
-
+require "rubygems"
+require "bundler/setup"
 require_relative "../config/environment.rb"
 Cli.run
-return
+
 
 require "irb"
 IRB.start(__FILE__)
+return
