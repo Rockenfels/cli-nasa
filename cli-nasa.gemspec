@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   end
   spec.bindir        = "bin"
   spec.require_paths = ["lib"]
+  spec.executables   = "run_me"
 end
