@@ -12,19 +12,9 @@ descriptions.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'cli-nasa'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install cli-nasa
+Clone or download this repository onto your machine. Once the files are
+available locally, use your command line to navigate into the `cli-nasa` folder
+and type `bin/run_me` to use CLI-NASA.
 
 ## Usage
 
