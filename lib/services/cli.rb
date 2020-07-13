@@ -1,4 +1,4 @@
-class Cli
+class Nasa::Cli
   attr_accessor :content
 
 
@@ -61,7 +61,7 @@ class Cli
 
   # Gets search terms and creates Content objects based on the provided results
   def self.keyword_search
-    Content.clear_results
+    Content.clear_search
     puts "\n\nPlease enter your search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
@@ -84,7 +84,7 @@ class Cli
 
   # Gets search terms and creates Content objects based on the provided results
   def self.image_search
-    Content.clear_results
+    Content.clear_search
     puts "\n\nPlease enter your image search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
@@ -107,7 +107,7 @@ class Cli
 
   # Gets search terms and creates Content objects based on the provided results
   def self.audio_search
-    Content.clear_results
+    Content.clear_search
     puts "\n\nPlease enter your audio search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
@@ -130,7 +130,7 @@ class Cli
 
   # Gets search terms and creates Content objects based on the provided results
   def self.video_search
-    Content.clear_results
+    Content.clear_search
     puts "\n\nPlease enter your video search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
