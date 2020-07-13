@@ -26,7 +26,7 @@ class Content
     Content.new(title, description, keywords, link)
   end
 
-  def clear_content
+  def clear_results
     @@all.clear
   end
 end

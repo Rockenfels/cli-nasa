@@ -3,7 +3,7 @@ require "rubygems"
 require "bundler/setup"
 require_relative "../config/environment.rb"
 
-cli.run
+Cli.run
 
 
 require "irb"
