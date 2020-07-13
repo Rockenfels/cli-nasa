@@ -2,8 +2,8 @@
 require "rubygems"
 require "bundler/setup"
 require_relative "../config/environment.rb"
-cli = Cli.new()
-cli.run
+
+Cli.run
 
 
 require "irb"

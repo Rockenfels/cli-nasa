@@ -25,4 +25,12 @@ class Content
   def self.add_content(title, description, keywords, link)
     Content.new(title, description, keywords, link)
   end
+
+  def self.sort
+    @@all.sort {|a, b| a.title <=> b.title}
+  end
+
+  def self.clear_results
+    @@all.clear
+  end
 end
