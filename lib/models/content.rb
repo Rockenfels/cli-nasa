@@ -25,4 +25,8 @@ class Content
   def self.add_content(title, description, keywords, link)
     Content.new(title, description, keywords, link)
   end
+
+  def clear_content
+    @@all.clear
+  end
 end
