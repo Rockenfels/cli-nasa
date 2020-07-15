@@ -23,7 +23,7 @@ class Nasa::Content
   end
 
   def self.add_content(title, description, keywords, link)
-    Content.new(title, description, keywords, link)
+    new(title, description, keywords, link)
   end
 
 end

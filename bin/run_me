@@ -1,11 +1,5 @@
 #!/usr/bin/env ruby
-require "rubygems"
 require "bundler/setup"
+require_relative "../lib/cli-nasa.rb"
 
-
-Cli.run
-
-
-require "irb"
-IRB.start(__FILE__)
-return
+Nasa::Cli.run

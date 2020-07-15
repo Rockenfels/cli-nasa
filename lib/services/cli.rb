@@ -32,7 +32,7 @@ class Nasa::Cli
   end
 
   # Runs the specific search requested by the user and returns results as
-  # an array of Content objects, asks the user to submit a valid command,
+  # an array ofNasa::Content objects, asks the user to submit a valid command,
   # or exits the program
   def self.search_menu_command
       command = self.get_input()
@@ -40,16 +40,16 @@ class Nasa::Cli
       case command
       when "s"
         self.keyword_search()
-        Content.all
+       Nasa::Content.all
       when "i"
         self.image_search()
-        Content.all
+       Nasa::Content.all
       when "a"
         self.audio_search()
-        Content.all
+       Nasa::Content.all
       when "v"
         self.video_search()
-        Content.all
+       Nasa::Content.all
       when "exit"
         puts "\n\nThank you, please come again!"
         exit
@@ -59,14 +59,14 @@ class Nasa::Cli
       end
   end
 
-  # Gets search terms and creates Content objects based on the provided results
+  # Gets search terms and createsNasa::Content objects based on the provided results
   def self.keyword_search
-    Content.clear_search
+   Nasa::Content.clear_search
     puts "\n\nPlease enter your search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
-    search_results = CliNasaAPI.basic_search(terms)
+    search_results = Nasa::CliNasaAPI.basic_search(terms)
     search_results = search_results["collection"]["items"]
 
     search_results.each do |result|
@@ -78,18 +78,18 @@ class Nasa::Cli
       keywords = attributes["keywords"]
       link = links["href"] if links != nil
 
-      Content.add_content(title, description, keywords, link)
+     Nasa::Content.add_content(title, description, keywords, link)
     end
   end
 
-  # Gets search terms and creates Content objects based on the provided results
+  # Gets search terms and createsNasa::Content objects based on the provided results
   def self.image_search
-    Content.clear_search
+   Nasa::Content.clear_search
     puts "\n\nPlease enter your image search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
-    search_results = CliNasaAPI.media_search("image", terms)
+    search_results =Nasa::CliNasaAPI.media_search("image", terms)
     search_results = search_results["collection"]["items"]
 
     search_results.each do |result|
@@ -101,18 +101,18 @@ class Nasa::Cli
       keywords = attributes["keywords"]
       link = links["href"]
 
-      Content.add_content(title, description, keywords, link)
+     Nasa::Content.add_content(title, description, keywords, link)
     end
   end
 
-  # Gets search terms and creates Content objects based on the provided results
+  # Gets search terms and createsNasa::Content objects based on the provided results
   def self.audio_search
-    Content.clear_search
+   Nasa::Content.clear_search
     puts "\n\nPlease enter your audio search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
-    search_results = CliNasaAPI.media_search("audio", terms)
+    search_results =Nasa::CliNasaAPI.media_search("audio", terms)
     search_results = search_results["collection"]["items"]
 
     search_results.each do |result|
@@ -124,18 +124,18 @@ class Nasa::Cli
       keywords = attributes["keywords"]
       link = links["href"] if links != nil
 
-      Content.add_content(title, description, keywords, link)
+     Nasa::Content.add_content(title, description, keywords, link)
     end
   end
 
-  # Gets search terms and creates Content objects based on the provided results
+  # Gets search terms and createsNasa::Content objects based on the provided results
   def self.video_search
-    Content.clear_search
+   Nasa::Content.clear_search
     puts "\n\nPlease enter your video search terms.\n\n"
     terms = gets.chomp!
     terms = terms.split(" ").join("%20")
 
-    search_results = CliNasaAPI.media_search("video", terms)
+    search_results =Nasa::CliNasaAPI.media_search("video", terms)
     search_results = search_results["collection"]["items"]
 
     search_results.each do |result|
@@ -147,7 +147,7 @@ class Nasa::Cli
       keywords = attributes["keywords"]
       link = links["href"] if links != nil
 
-      Content.add_content(title, description, keywords, link)
+     Nasa::Content.add_content(title, description, keywords, link)
     end
   end
 
