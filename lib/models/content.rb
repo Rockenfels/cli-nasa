@@ -1,4 +1,4 @@
-class Content
+class Nasa::Content
   attr_reader :title, :description, :keywords, :link
 
   @@all = []

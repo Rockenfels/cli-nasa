@@ -1,4 +1,4 @@
-class CliNasaAPI
+class Nasa::CliNasaAPI
   @baseline = "https://images-api.nasa.gov"
 
   # Returns results of all types based on the terms provided
