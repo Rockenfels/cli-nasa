@@ -4,11 +4,12 @@ class Nasa::Content
   @@all = []
 
   #Ruby constructor call
-  def initialize(title, description, keywords, link="Link not provided")
+  def initialize(title, description, keywords, link="Link not provided", media_type=nil)
     @title = title
     @description = description
     @keywords = keywords
     @link = link
+    @media_type = media_type
 
     #adds instance of Content to @@all
     @@all << self

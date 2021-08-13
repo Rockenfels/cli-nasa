@@ -1,3 +1,6 @@
+require 'ascii-image'
+require "mini_magick"
+
 class Nasa::Cli
   attr_accessor :content
 
@@ -40,16 +43,16 @@ class Nasa::Cli
       case command
       when "s"
         self.keyword_search()
-       Nasa::Content.all
+        Nasa::Content.all
       when "i"
         self.image_search()
-       Nasa::Content.all
+        Nasa::Content.all
       when "a"
         self.audio_search()
-       Nasa::Content.all
+        Nasa::Content.all
       when "v"
         self.video_search()
-       Nasa::Content.all
+        Nasa::Content.all
       when "exit"
         puts "\n\nThank you, please come again!"
         exit
@@ -92,17 +95,7 @@ class Nasa::Cli
     search_results =Nasa::CliNasaAPI.media_search("image", terms)
     search_results = search_results["collection"]["items"]
 
-    search_results.each do |result|
-      attributes = result["data"][0]
-      links = result["links"][0]
-
-      title = attributes["title"]
-      description = attributes["description"]
-      keywords = attributes["keywords"]
-      link = links["href"]
-
-     Nasa::Content.add_content(title, description, keywords, link)
-    end
+    self.add_content(search_results)
   end
 
   # Gets search terms and createsNasa::Content objects based on the provided results
@@ -115,17 +108,8 @@ class Nasa::Cli
     search_results =Nasa::CliNasaAPI.media_search("audio", terms)
     search_results = search_results["collection"]["items"]
 
-    search_results.each do |result|
-      attributes = result["data"][0]
-      links = result["links"][0] if result["links"] != nil
+    self.add_content(search_results)
 
-      title = attributes["title"]
-      description = attributes["description"]
-      keywords = attributes["keywords"]
-      link = links["href"] if links != nil
-
-     Nasa::Content.add_content(title, description, keywords, link)
-    end
   end
 
   # Gets search terms and createsNasa::Content objects based on the provided results
@@ -138,17 +122,7 @@ class Nasa::Cli
     search_results =Nasa::CliNasaAPI.media_search("video", terms)
     search_results = search_results["collection"]["items"]
 
-    search_results.each do |result|
-      attributes = result["data"][0]
-      links = result["links"][0] if result["links"] != nil
-
-      title = attributes["title"]
-      description = attributes["description"]
-      keywords = attributes["keywords"]
-      link = links["href"] if links != nil
-
-     Nasa::Content.add_content(title, description, keywords, link)
-    end
+    self.add_content(search_results)
   end
 
   # Method for displaying a piece of content, navigating thorugh its data,
@@ -156,11 +130,23 @@ class Nasa::Cli
   def self.display_content(results)
     input = ""
     page = 1
-
     while input != "s"
 
       current = results[page-1]
       puts "\n\nPage #{page}: #{current.title}"
+
+      # if input == 'i', use catpix to display the image
+      if input == "i" 
+        # if ascii-image doesn't work
+        # image = MiniMagick::Image.open(results[link])
+        # image.format = "png"
+        # image.write("../assets/current.png")
+
+        ascii = ASCII_Image.new(current.link)
+        ascii.build(60)
+
+      end
+
       if current.link == nil
         puts "Link: link not available"
       else
@@ -196,6 +182,22 @@ class Nasa::Cli
       else
         puts "\n\nCommand not recognized, please try again.\n"
       end
+    end
+  end
+
+  # Refactor to push results to content class 
+  def self.add_content(search_results)
+    search_results.each do |result|
+      attributes = result["data"][0]
+      links = result["links"][0] if result["links"] != nil
+
+      title = attributes["title"]
+      description = attributes["description"]
+      keywords = attributes["keywords"]
+      link = links["href"] if links != nil
+      media_type = attributes["media_type"]
+
+     Nasa::Content.add_content(title, description, keywords, link)
     end
   end
 end
