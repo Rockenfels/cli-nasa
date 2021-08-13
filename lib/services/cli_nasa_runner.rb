@@ -13,7 +13,7 @@ class Nasa::CliNasaAPI
     when "image"
       results = HTTParty.get(@baseline + "/search?q=#{terms}&media_type=image", format: :plain)
       parsed_results = JSON.parse(results.body)
-      puts parsed_results.class
+      # puts parsed_results.class
       parsed_results
     when "audio"
       results = HTTParty.get(@baseline + "/search?q=#{terms}&media_type=audio", format: :plain)

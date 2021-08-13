@@ -3,7 +3,7 @@ class Nasa::Content
 
   @@all = []
 
-#
+  #Ruby constructor call
   def initialize(title, description, keywords, link="Link not provided")
     @title = title
     @description = description
@@ -14,6 +14,7 @@ class Nasa::Content
     @@all << self
   end
 
+  # Class method definition using `self.method_name`
   def self.clear_search
     @@all.clear
   end

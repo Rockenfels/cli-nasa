@@ -9,6 +9,7 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2020.0512)
+    mini_magick (4.11.0)
     multi_xml (0.6.0)
     rake (12.3.3)
     rspec (3.9.0)
@@ -31,8 +32,9 @@ PLATFORMS
 DEPENDENCIES
   httparty
   json
+  mini_magick
   rake (~> 12.0)
   rspec (~> 3.0)
 
 BUNDLED WITH
-   2.1.4
+   2.2.24
