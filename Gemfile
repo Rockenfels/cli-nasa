@@ -7,5 +7,4 @@ gem "httparty"
 gem "json"
 
 gem "mini_magick"
-# gem "catpix"
-gem 'ascii-image'
+gem "catpix"

@@ -1,4 +1,4 @@
-require 'ascii-image'
+require "catpix"
 require "mini_magick"
 
 class Nasa::Cli
@@ -72,17 +72,8 @@ class Nasa::Cli
     search_results = Nasa::CliNasaAPI.basic_search(terms)
     search_results = search_results["collection"]["items"]
 
-    search_results.each do |result|
-      attributes = result["data"][0]
-      links = result["links"][0] if result["links"] != nil
+    self.add_content(search_results)
 
-      title = attributes["title"]
-      description = attributes["description"]
-      keywords = attributes["keywords"]
-      link = links["href"] if links != nil
-
-     Nasa::Content.add_content(title, description, keywords, link)
-    end
   end
 
   # Gets search terms and createsNasa::Content objects based on the provided results
@@ -133,18 +124,19 @@ class Nasa::Cli
     while input != "s"
 
       current = results[page-1]
+      puts current.to_s
       puts "\n\nPage #{page}: #{current.title}"
 
       # if input == 'i', use catpix to display the image
-      if input == "i" 
+      if current.media_type == "image" 
         # if ascii-image doesn't work
-        # image = MiniMagick::Image.open(results[link])
-        # image.format = "png"
-        # image.write("../assets/current.png")
+        image = MiniMagick::Image.open(current.link)
 
-        ascii = ASCII_Image.new(current.link)
-        ascii.build(60)
-
+        Dir.chdir './assets'
+        image.write("current.jpeg")
+        
+        Catpix::print_image "current.jpeg", 
+          :resolution => "low"
       end
 
       if current.link == nil
@@ -197,7 +189,7 @@ class Nasa::Cli
       link = links["href"] if links != nil
       media_type = attributes["media_type"]
 
-     Nasa::Content.add_content(title, description, keywords, link)
+     Nasa::Content.add_content(title, description, keywords, link, media_type)
     end
   end
 end
