@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.add_runtime_dependency 'httparty', '0.18.1'
+  spec.add_runtime_dependency 'httparty', '0.21.0'
   spec.add_runtime_dependency 'json'
   spec.add_runtime_dependency 'rake', '~> 12.0'
   spec.add_runtime_dependency 'rspec', '~> 3.0'
